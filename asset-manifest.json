@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/petrol-pump-manager/static/css/main.f855e6bc.css",
+    "main.js": "/petrol-pump-manager/static/js/main.e7df63dc.js",
+    "static/js/453.0f1fdbdc.chunk.js": "/petrol-pump-manager/static/js/453.0f1fdbdc.chunk.js",
+    "index.html": "/petrol-pump-manager/index.html",
+    "main.f855e6bc.css.map": "/petrol-pump-manager/static/css/main.f855e6bc.css.map",
+    "main.e7df63dc.js.map": "/petrol-pump-manager/static/js/main.e7df63dc.js.map",
+    "453.0f1fdbdc.chunk.js.map": "/petrol-pump-manager/static/js/453.0f1fdbdc.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f855e6bc.css",
+    "static/js/main.e7df63dc.js"
+  ]
+}
