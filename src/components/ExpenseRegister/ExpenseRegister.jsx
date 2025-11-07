@@ -46,7 +46,10 @@ export default function ExpenseRegister() {
   };
 
   return (
-    <Box sx={{ mt: 3, height: '100%' }}>
+    <Box sx={{ mt: 3, minHeight: '100vh' }}>
+      <h2>Expense Register</h2>
+      <p>Manage your expenses related to the petrol pump here.</p>
+      <br />
       <Button variant="contained" onClick={handleAddRow}>
         + Add Expense
       </Button>

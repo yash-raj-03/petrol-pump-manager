@@ -17,7 +17,6 @@ import {
   MenuItem,
   Select,
   IconButton,
-  Typography,
 } from "@mui/material";
 
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -65,11 +64,11 @@ export default function ProductSales() {
   };
 
   return (
-    <Box sx={{ mt: 3 }}>
-      <Typography variant="h4">Products Sold</Typography>
-      <Typography>Manage the products sold in the petrol pump.</Typography>
+    <Box sx={{ mt: 3, minHeight: '100vh' }}>
+      <h2>Products Sold</h2>
+      <p>Manage the products sold in the petrol pump.</p>
       <br />
-      <Button variant="contained" sx={{ my: 2 }} onClick={handleAdd}>
+      <Button variant="contained" onClick={handleAdd}>
         + Add Product Sold
       </Button>
 

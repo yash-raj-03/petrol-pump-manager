@@ -71,7 +71,9 @@ export default function FuelSaleEntry() {
 
   return (
     <Box sx={{ width: "100%" }}>
-
+      <h2>Fuel Sale Entry</h2>
+      <p>Enter the fuel sale details below.</p>
+      <br />
       {/* ✅ FUEL PRICES FIRST (TOP) */}
       <Card sx={{ mb: 3 }}>
         <CardContent>
