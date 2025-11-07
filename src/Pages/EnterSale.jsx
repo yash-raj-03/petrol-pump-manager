@@ -1,14 +1,20 @@
-import { useState } from "react";
-import { Box, Typography, TextField } from "@mui/material";
+import { Box, Typography, Button } from "@mui/material";
 import { DatePicker, TimePicker } from "@mui/x-date-pickers";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setDate,
+  setOpeningTime,
+  setClosingTime,
+} from "../store/saleSlice";
 import Tabs from "../components/Tabs/Tabs";
 
 export default function EnterSale() {
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const [openingTime, setOpeningTime] = useState(null);
-  const [closingTime, setClosingTime] = useState(null);
+  const dispatch = useDispatch();
+
+  // ✅ Get values from Redux
+  const { date, openingTime, closingTime } = useSelector((state) => state.sale);
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -39,31 +45,42 @@ export default function EnterSale() {
             width: "100%",
           }}
         >
-          {/* Date Picker */}
+          {/* ✅ Date Picker (Redux controlled) */}
           <DatePicker
             label="Select Date"
-            value={selectedDate}
-            onChange={(newDate) => setSelectedDate(newDate)}
+            value={date ? new Date(date) : null}
+            onChange={(newDate) => {
+              dispatch(setDate(newDate ? newDate.toISOString() : ""));
+            }}
             slotProps={{
               textField: { fullWidth: true, sx: { maxWidth: 300 } },
             }}
+            format="dd-MM-yyyy"
           />
 
-          {/* Opening Time */}
+          {/* ✅ Opening Time */}
           <TimePicker
             label="Opening Time"
-            value={openingTime}
-            onChange={(newTime) => setOpeningTime(newTime)}
+            value={openingTime ? new Date(openingTime) : null}
+            onChange={(newTime) =>
+              dispatch(
+                setOpeningTime(newTime ? newTime.toISOString() : "")
+              )
+            }
             slotProps={{
               textField: { fullWidth: true, sx: { maxWidth: 250 } },
             }}
           />
 
-          {/* Closing Time */}
+          {/* ✅ Closing Time */}
           <TimePicker
             label="Closing Time"
-            value={closingTime}
-            onChange={(newTime) => setClosingTime(newTime)}
+            value={closingTime ? new Date(closingTime) : null}
+            onChange={(newTime) =>
+              dispatch(
+                setClosingTime(newTime ? newTime.toISOString() : "")
+              )
+            }
             slotProps={{
               textField: { fullWidth: true, sx: { maxWidth: 250 } },
             }}
@@ -72,6 +89,16 @@ export default function EnterSale() {
 
         {/* Tabs Section */}
         <Tabs />
+        <Button
+          variant="contained"
+          color="primary"
+          size="large"
+          width="fit-content"
+          style={{ margin: 'auto'}}
+        >
+          Save
+        </Button>
+        <br />
       </Box>
     </LocalizationProvider>
   );
