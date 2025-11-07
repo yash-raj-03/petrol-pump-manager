@@ -1,4 +1,4 @@
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { DatePicker, TimePicker } from "@mui/x-date-pickers";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
@@ -21,7 +21,7 @@ export default function EnterSale() {
       <Box
         sx={{
           width: "100%",
-          maxWidth: "900px",
+          maxWidth: "1200px",
           mx: "auto",
           mt: 4,
           px: 2,
@@ -89,15 +89,6 @@ export default function EnterSale() {
 
         {/* Tabs Section */}
         <Tabs />
-        <Button
-          variant="contained"
-          color="primary"
-          size="large"
-          width="fit-content"
-          style={{ margin: 'auto'}}
-        >
-          Save
-        </Button>
         <br />
       </Box>
     </LocalizationProvider>

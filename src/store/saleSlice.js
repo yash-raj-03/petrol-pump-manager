@@ -29,6 +29,7 @@ const initialState = {
   },
 
   expenses: [],
+  productSales: [],
 
   // ✅ Total fuel sale + amount
   totals: {
@@ -140,6 +141,27 @@ const saleSlice = createSlice({
       state.expenses = state.expenses.filter((e) => e.id !== action.payload);
     },
 
+    addProductSale(state, action) {
+      state.productSales.push({
+        ...action.payload,
+      });
+    },
+
+    updateProductSale(state, action) {
+      const { id, updated } = action.payload;
+      const index = state.productSales.findIndex((s) => s.id === id);
+      if (index !== -1) {
+        state.productSales[index] = {
+          ...state.productSales[index],
+          ...updated,
+        };
+      }
+    },
+
+    deleteProductSale(state, action) {
+      state.productSales = state.productSales.filter((s) => s.id !== action.payload);
+    },
+
   },
 });
 
@@ -154,6 +176,9 @@ export const {
   addExpense,
   updateExpense,
   deleteExpense,
+  addProductSale,
+  updateProductSale,
+  deleteProductSale,
 } = saleSlice.actions;
 
 export default saleSlice.reducer;

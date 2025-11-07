@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import { Box, Tabs, Tab } from "@mui/material";
 import FuelSaleEntry from "../FuelSaleEntry/FuelSaleEntry";
 import ExpenseRegister from "../ExpenseRegister/ExpenseRegister";
-
-// ---- Example Components for each tab ---- //
-const InventoryComponent = () => <div>Inventory Component Content</div>;
-const ReportsComponent = () => <div>Reports Component Content</div>;
+import TotalSales from "../TotalSales/TotalSales";
+import ProductSales from "../ProductSales/ProductSales";
 
 // ---- Tab Panel Helper ---- //
 function TabPanel({ children, value, index }) {
@@ -50,7 +48,7 @@ export default function SalesTabs() {
       </TabPanel>
 
       <TabPanel value={value} index={1}>
-        <InventoryComponent />
+        <ProductSales />
       </TabPanel>
 
       <TabPanel value={value} index={2}>
@@ -58,7 +56,7 @@ export default function SalesTabs() {
       </TabPanel>
 
       <TabPanel value={value} index={3}>
-        <></>
+        <TotalSales />
       </TabPanel>
     </Box>
   );

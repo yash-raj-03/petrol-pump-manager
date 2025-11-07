@@ -46,7 +46,7 @@ export default function ExpenseRegister() {
   };
 
   return (
-    <Box sx={{ mt: 3 }}>
+    <Box sx={{ mt: 3, height: '100%' }}>
       <Button variant="contained" onClick={handleAddRow}>
         + Add Expense
       </Button>
