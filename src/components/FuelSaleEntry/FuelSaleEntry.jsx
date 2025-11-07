@@ -86,7 +86,7 @@ export default function FuelSaleEntry() {
   const grandTotal = Number((petrolAmount + dieselAmount).toFixed(2));
 
   return (
-    <Box sx={{ width: "100%", p: 2 }}>
+    <Box sx={{ width: "100%"  }}>
       
       {/* ✅ FUEL PRICES FIRST (TOP) */}
       <Card sx={{ mb: 3 }}>

@@ -11,7 +11,7 @@ function TabPanel({ children, value, index }) {
   return (
     <div hidden={value !== index}>
       {value === index && (
-        <Box sx={{ p: 2 }}>
+        <Box sx={{ pt: 2 }}>
           {children}
         </Box>
       )}
@@ -38,7 +38,7 @@ export default function SalesTabs() {
         sx={{ borderBottom: 1, borderColor: "divider" }}
       >
         <Tab label="Fuel Sales" />
-        <Tab label="Inventory" />
+        <Tab label="Product Sales" />
         <Tab label="Reports" />
       </Tabs>
 

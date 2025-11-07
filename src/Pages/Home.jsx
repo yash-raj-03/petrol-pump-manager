@@ -16,7 +16,7 @@ export default function Home() {
     >
       {/* Heading */}
       <Typography variant="h4" fontWeight="bold">
-        Fuel Management System
+        Fuel Sales Management System
       </Typography>
 
       {/* Buttons as links */}
@@ -42,7 +42,8 @@ export default function Home() {
         <Button
           component="a"
           href="/fetch-sales"
-          variant="outlined"
+          variant="contained"
+          color="primary"
           size="large"
           fullWidth
         >
@@ -53,11 +54,22 @@ export default function Home() {
           component="a"
           href="/dashboard"
           variant="contained"
-          color="secondary"
+          color="primary"
           size="large"
           fullWidth
         >
           Dashboard
+        </Button>
+
+        <Button
+          component="a"
+          href="/inventory"
+          variant="contained"
+          color="primary"
+          size="large"
+          fullWidth
+        >
+          Inventory
         </Button>
       </Box>
     </Box>

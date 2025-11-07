@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { Box, Typography, TextField } from "@mui/material";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { DatePicker, TimePicker } from "@mui/x-date-pickers";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import Tabs from "../components/Tabs/Tabs";
 
 export default function EnterSale() {
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [openingTime, setOpeningTime] = useState(null);
+  const [closingTime, setClosingTime] = useState(null);
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -27,25 +29,48 @@ export default function EnterSale() {
           Enter Fuel Sale
         </Typography>
 
-        {/* Date Picker Section */}
+        {/* Date + Time Section */}
         <Box
           sx={{
             display: "flex",
+            flexDirection: { xs: "column", md: "row" },
             justifyContent: "center",
+            gap: 3,
             width: "100%",
           }}
         >
+          {/* Date Picker */}
           <DatePicker
             label="Select Date"
             value={selectedDate}
             onChange={(newDate) => setSelectedDate(newDate)}
-            renderInput={(props) => (
-              <TextField {...props} fullWidth sx={{ maxWidth: 300 }} />
-            )}
+            slotProps={{
+              textField: { fullWidth: true, sx: { maxWidth: 300 } },
+            }}
+          />
+
+          {/* Opening Time */}
+          <TimePicker
+            label="Opening Time"
+            value={openingTime}
+            onChange={(newTime) => setOpeningTime(newTime)}
+            slotProps={{
+              textField: { fullWidth: true, sx: { maxWidth: 250 } },
+            }}
+          />
+
+          {/* Closing Time */}
+          <TimePicker
+            label="Closing Time"
+            value={closingTime}
+            onChange={(newTime) => setClosingTime(newTime)}
+            slotProps={{
+              textField: { fullWidth: true, sx: { maxWidth: 250 } },
+            }}
           />
         </Box>
 
-        {/* Tabs Section (Sales / Inventory / etc.) */}
+        {/* Tabs Section */}
         <Tabs />
       </Box>
     </LocalizationProvider>
