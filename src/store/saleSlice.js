@@ -149,18 +149,29 @@ const saleSlice = createSlice({
 
     updateProductSale(state, action) {
       const { id, updated } = action.payload;
-      const index = state.productSales.findIndex((s) => s.id === id);
+      const index = state.productSales.findIndex((s) => s.productId === id);
       if (index !== -1) {
-        state.productSales[index] = {
-          ...state.productSales[index],
-          ...updated,
-        };
+        const existing = state.productSales[index];
+        // Merge updates
+        const newData = { ...existing, ...updated };
+
+        // ✅ Auto-update amount if quantity or price changed
+        if (updated.quantity !== undefined || updated.price !== undefined) {
+          newData.amount = Number(newData.quantity) * Number(newData.price);
+        }
+
+        state.productSales[index] = newData;
       }
     },
 
     deleteProductSale(state, action) {
       state.productSales = state.productSales.filter((s) => s.id !== action.payload);
     },
+
+    loadSale(state, action) {
+      return { ...state, ...action.payload };
+    }
+
 
   },
 });
@@ -179,6 +190,7 @@ export const {
   addProductSale,
   updateProductSale,
   deleteProductSale,
+  loadSale
 } = saleSlice.actions;
 
 export default saleSlice.reducer;

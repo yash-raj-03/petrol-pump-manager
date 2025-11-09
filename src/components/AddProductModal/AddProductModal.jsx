@@ -5,26 +5,39 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { addProduct } from "../../store/inventorySlice";
+import { addProduct, updateProduct } from "../../store/inventorySlice";
 
-export default function AddProductModal({ open, onClose }) {
+export default function AddProductModal({ open, onClose, editData }) {
   const dispatch = useDispatch();
 
   const [form, setForm] = useState({
     name: "",
     price: "",
     stock: "",
+    unit: "",
     description: "",
   });
+
+  // ✅ Load edit data when editing
+  useEffect(() => {
+    if (editData) setForm(editData);
+  }, [editData]);
 
   const handleChange = (field, value) => {
     setForm((f) => ({ ...f, [field]: value }));
   };
 
   const handleSave = () => {
-    dispatch(addProduct(form));
+    if (editData) {
+      // ✅ Update existing product
+      dispatch(updateProduct({ id: editData.id, updated: form }));
+    } else {
+      // ✅ Add new product
+      dispatch(addProduct(form));
+    }
+
     onClose();
   };
 
@@ -43,7 +56,7 @@ export default function AddProductModal({ open, onClose }) {
         }}
       >
         <Typography variant="h6" mb={2}>
-          Add New Product
+          {editData ? "Edit Product" : "Add New Product"}
         </Typography>
 
         <TextField
@@ -88,7 +101,7 @@ export default function AddProductModal({ open, onClose }) {
           sx={{ mt: 2 }}
           onClick={handleSave}
         >
-          Save Product
+          {editData ? "Update Product" : "Save Product"}
         </Button>
       </Box>
     </Modal>
