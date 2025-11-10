@@ -50,6 +50,7 @@ export default function FetchSale() {
           display: "flex",
           flexDirection: "column",
           gap: 4,
+          minHeight: '100vh'
         }}
       >
         <Typography variant="h4" fontWeight="bold" textAlign="center">

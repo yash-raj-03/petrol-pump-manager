@@ -135,135 +135,82 @@ export default function FuelSaleEntry() {
       {["machine1", "machine2"].map((machine, idx) => (
         <Card key={machine} sx={{ mb: 3 }}>
           <CardContent>
-            <Typography variant="h6" fontWeight="bold">
+            <Typography variant="h6" fontWeight="bold" sx={{ mb: 2 }}>
               Machine {idx + 1}
             </Typography>
-            <Divider sx={{ my: 1 }} />
 
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: { xs: "column", md: "row" },
-                gap: 2,
-              }}
-            >
-              {/* ✅ Petrol Nozzles */}
-              <Box sx={{ flex: 1 }}>
-                <Typography fontWeight="bold" sx={{ mb: 1 }}>
-                  Petrol Nozzles
-                </Typography>
+            {[
+              { key: "p1", label: "Petrol Nozzle 1" },
+              { key: "p2", label: "Petrol Nozzle 2" },
+              { key: "d1", label: "Diesel Nozzle 1" },
+              { key: "d2", label: "Diesel Nozzle 2" },
+            ].map(({ key, label }) => {
+              const noz = machines[machine][key];
+              const sale = calcSale(noz.open, noz.close);
 
-                {["p1", "p2"].map((noz) => {
-                  const n = machines[machine][noz];
-                  const sale = calcSale(n.open, n.close);
+              return (
+                <Box
+                  key={key}
+                  sx={{
+                    mb: 2,
+                    display: "flex",
+                    flexDirection: { xs: 'column', md: 'row' },
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: 4,
+                    border: "1px solid #ddd",
+                    borderRadius: 2,
+                    p: 2,
+                  }}
+                >
+                  {/* LABEL */}
+                  <Typography
+                    fontWeight="bold"
+                    sx={{ mb: 1, fontSize: "1rem" }}
+                  >
+                    {label}
+                  </Typography>
 
-                  return (
-                    <Card variant="outlined" key={noz} sx={{ mb: 2 }}>
-                      <CardContent>
-                        <Typography fontWeight="bold" gutterBottom>
-                          {noz === "p1" ? "Petrol Nozzle 1" : "Petrol Nozzle 2"}
-                        </Typography>
+                  {/* INPUT ROW */}
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: { xs: "column", sm: "row" },
+                      gap: 2,
+                    }}
+                  >
+                    <TextField
+                      label="Opening"
+                      fullWidth
+                      value={noz.open}
+                      onChange={(e) =>
+                        handleReadingChange(machine, key, "open", e.target.value)
+                      }
+                      onWheel={(e) => e.target.blur()}
+                    />
 
-                        <TextField
-                          label="Opening"
-                          fullWidth
-                          margin="dense"
-                          value={n.open}
-                          onChange={(e) =>
-                            handleReadingChange(
-                              machine,
-                              noz,
-                              "open",
-                              e.target.value
-                            )
-                          }
-                        />
+                    <TextField
+                      label="Closing"
+                      fullWidth
+                      value={noz.close}
+                      onChange={(e) =>
+                        handleReadingChange(machine, key, "close", e.target.value)
+                      }
+                      onWheel={(e) => e.target.blur()}
+                    />
+                  </Box>
 
-                        <TextField
-                          label="Closing"
-                          fullWidth
-                          margin="dense"
-                          value={n.close}
-                          onChange={(e) =>
-                            handleReadingChange(
-                              machine,
-                              noz,
-                              "close",
-                              e.target.value
-                            )
-                          }
-                        />
-
-                        <Typography sx={{ mt: 1 }} color="primary">
-                          Sale: <strong>{sale.toFixed(2)} L</strong>
-                        </Typography>
-                      </CardContent>
-                    </Card>
-                  );
-                })}
-              </Box>
-
-              {/* ✅ Diesel Nozzles */}
-              <Box sx={{ flex: 1 }}>
-                <Typography fontWeight="bold" sx={{ mb: 1 }}>
-                  Diesel Nozzles
-                </Typography>
-
-                {["d1", "d2"].map((noz) => {
-                  const n = machines[machine][noz];
-                  const sale = calcSale(n.open, n.close);
-
-                  return (
-                    <Card variant="outlined" key={noz} sx={{ mb: 2 }}>
-                      <CardContent>
-                        <Typography fontWeight="bold" gutterBottom>
-                          {noz === "d1"
-                            ? "Diesel Nozzle 1"
-                            : "Diesel Nozzle 2"}
-                        </Typography>
-
-                        <TextField
-                          label="Opening"
-                          fullWidth
-                          margin="dense"
-                          value={n.open}
-                          onChange={(e) =>
-                            handleReadingChange(
-                              machine,
-                              noz,
-                              "open",
-                              e.target.value
-                            )
-                          }
-                        />
-
-                        <TextField
-                          label="Closing"
-                          fullWidth
-                          margin="dense"
-                          value={n.close}
-                          onChange={(e) =>
-                            handleReadingChange(
-                              machine,
-                              noz,
-                              "close",
-                              e.target.value
-                            )
-                          }
-                        />
-
-                        <Typography sx={{ mt: 1 }} color="primary">
-                          Sale: <strong>{sale.toFixed(2)} L</strong>
-                        </Typography>
-                      </CardContent>
-                    </Card>
-                  );
-                })}
-              </Box>
-            </Box>
+                  {/* SALE */}
+                  <Typography sx={{ mt: 1 }} color="primary">
+                    Sale: <strong>{sale.toFixed(2)} L</strong>
+                  </Typography>
+                </Box>
+              );
+            })}
           </CardContent>
         </Card>
       ))}
+
     </Box>
   );
 }
